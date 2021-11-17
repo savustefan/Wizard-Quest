@@ -1,0 +1,14 @@
+p {
+    font-size: 20px;
+}
+
+.canvas-center, .story {
+    display: flex;
+    justify-content: center;
+}
+
+#canvas{
+    background-image: url("assets/background.png");
+    background-size: cover;
+}
+
