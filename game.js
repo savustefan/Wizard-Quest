@@ -1,23 +1,39 @@
-const canvas = document.getElementById("canvas")
-const ctx = canvas.getContext("2d")
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
 
-
-let hero = new Image()
+let hero = new Image();
 hero.onload = function (){
     ctx.drawImage(hero, wizard.x, wizard.y, wizard.w, wizard.h)
-}
+};
 hero.src = "assets/wizard.png";
 
+let lootImage = new Image();
+lootImage.onload = function () {
+    ctx.drawImage(lootImage, loot.x, loot.y)
+}
+lootImage.src = "assets/scroll.png";
+
+
+const loot = {
+    //w: 40,
+    //h: 40,
+    x: 80,
+    y: 50,
+    dx: 0,
+    dy: 0
+}
 
 const wizard = {
     w: 50,
     h: 70,
     x: 20,
-    y: 100,
+    y: 50,
     speed: 10,
     dx: 0,
     dy: 0
-}
+};
+
+
 
 function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -27,11 +43,16 @@ function drawPlayer() {
     ctx.drawImage(hero, wizard.x, wizard.y, wizard.w, wizard.h);
 }
 
+function drawLoot(){
+    ctx.drawImage(lootImage, loot.x, loot.y);
+}
+
 function newPos() {
     wizard.x += wizard.dx;
     wizard.y += wizard.dy;
 
     detectWalls();
+    detectLoot();
 }
 
 function detectWalls() {
@@ -56,10 +77,22 @@ function detectWalls() {
     }
 }
 
+const reset = function (){
+    loot.x = 32 + (Math.random() * (canvas.width - 64));
+    loot.y = 32 + (Math.random() * (canvas.width - 64));
+}
+function detectLoot(){
+    if (wizard.x <= (loot.x + 32) && loot.x <= (wizard.x + 32) && loot.y <= (wizard.y + 32)){
+     reset();
+    }
+}
+
 function update() {
     clear();
 
     drawPlayer();
+
+    drawLoot();
 
     newPos();
 
