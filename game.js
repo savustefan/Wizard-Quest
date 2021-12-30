@@ -15,10 +15,8 @@ lootImage.src = "assets/scroll.png";
 
 
 const loot = {
-    //w: 40,
-    //h: 40,
-    x: 80,
-    y: 50,
+    x:  0,
+    y:  0,
     dx: 0,
     dy: 0
 }
@@ -26,14 +24,12 @@ const loot = {
 const wizard = {
     w: 50,
     h: 70,
-    x: 20,
-    y: 50,
+    x: 0,
+    y: 0,
     speed: 10,
     dx: 0,
     dy: 0
 };
-
-
 
 function clear() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -77,9 +73,9 @@ function detectWalls() {
     }
 }
 
-const reset = function (){
-    loot.x = 32 + (Math.random() * (canvas.width - 64));
-    loot.y = 32 + (Math.random() * (canvas.width - 64));
+const reset = function () {
+    loot.x = (Math.random() * (canvas.width - 64));
+    loot.y = (Math.random() * (canvas.width - 64));
 }
 function detectLoot(){
     if (wizard.x <= (loot.x + 32) && loot.x <= (wizard.x + 32) && loot.y <= (wizard.y + 32)){
